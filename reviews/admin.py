@@ -6,7 +6,8 @@ from .models import Product, Category, Company, ProductSize, ProductSite, Commen
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('pk', 'name', 'content')
+    list_filter = ('category', )
 
 
 admin.site.register(Category)
