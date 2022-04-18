@@ -31,6 +31,7 @@ class Product(models.Model):
     category = models.ManyToManyField(Category, related_name='products')
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
+    image = models.ManyToManyField('reviews.Image', related_name='products')
 
     class Meta:
         ordering = ['-created']
