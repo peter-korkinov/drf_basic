@@ -149,3 +149,14 @@ VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
         ('small_square_crop', 'crop__50x50'),
     ]
 }
+
+
+CORS_ALLOWED_ORIGINS = [
+    'https://www.test-cors.org',
+]
+
+CORS_TRUSTED_ORIGINS = [
+    'www.test-cprs.org',
+]
+
+CORS_ALLOW_CREDENTIALS = True
