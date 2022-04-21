@@ -1,4 +1,5 @@
 from rest_flex_fields import FlexFieldsModelSerializer
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 
 from .models import Product, Category, Company, ProductSize, ProductSite, Comment, Image
@@ -73,3 +74,12 @@ class ImageSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = Image
         fields = ['pk', 'name', 'image']
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super(MyTokenObtainPairSerializer, cls).get_token(user)
+
+        token['username'] = user.username
+        return token
