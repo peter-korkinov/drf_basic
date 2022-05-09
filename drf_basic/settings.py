@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_filters',
     'versatileimagefield',
     'corsheaders',
+    'rest_framework_simplejwt.token_blacklist',
 
     'reviews',
 ]
