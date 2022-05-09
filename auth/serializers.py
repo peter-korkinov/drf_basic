@@ -1,3 +1,5 @@
+import abc
+
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
@@ -75,6 +77,11 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
         return value
 
     def update(self, instance, validated_data):
+        user = self.context['request'].user
+
+        if user.pk != instance.pk:
+            raise serializers.ValidationError({"authorize": "You don't have permission for this user."})
+
         instance.set_password(validated_data['password'])
         instance.save()
 
@@ -109,6 +116,11 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         return value
 
     def update(self, instance, validated_data):
+        user = self.context['request']
+
+        if user.pk != instance.pk:
+            raise serializers.ValidationError({"authorization": "You don't have permission for this user."})
+
         instance.first_name = validated_data['first_name']
         instance.last_name = validated_data['last_name']
         instance.email = validated_data['email']
